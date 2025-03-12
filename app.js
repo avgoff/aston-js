@@ -87,8 +87,7 @@ function selectFromInterval (arr, a, b) {
     const sortPos = [];
     sortPos.push(a,b)
     sortPos.sort((a,b)=> a-b);      
-
-    return arr.slice(sortPos[0], sortPos[1]+1).sort((a,b)=> a-b);
+    return arr.filter(value=> value >= sortPos[0] && value <= sortPos[1])
 }
 console.log(selectFromInterval(myArr, 3, 1));
 console.log(selectFromInterval(myArr2, 3, 1));//Error "There are not only numbers in the array!"
