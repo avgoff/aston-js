@@ -72,6 +72,7 @@ console.log('obCopy: ', obCopy.b.c) // 11
 //2
 const myArr = [1,2,3,4,5];
 const myArr2 = [1,2,3,4,'str'];
+const myArr3 = [5,2,3,1,3,3,5,4,];
 
 function selectFromInterval (arr, a, b) {
     if(!Array.isArray(arr)){
@@ -87,9 +88,10 @@ function selectFromInterval (arr, a, b) {
     const sortPos = [];
     sortPos.push(a,b)
     sortPos.sort((a,b)=> a-b);      
-    return arr.filter(value=> value >= sortPos[0] && value <= sortPos[1])
+    return arr.filter(value=> value >= sortPos[0] && value <= sortPos[1]).sort((a,b)=> a-b)
 }
 console.log(selectFromInterval(myArr, 3, 1));
+console.log(selectFromInterval(myArr3, 3, 1));
 console.log(selectFromInterval(myArr2, 3, 1));//Error "There are not only numbers in the array!"
 
 //3
