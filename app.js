@@ -120,3 +120,71 @@ function reverseStr(str) {
     return revStr.reverse().join(' ')
 }
 console.log(reverseStr(myStr1));
+
+//hw-5
+//1
+function memoize(callback) {
+    const cache = {}
+
+    return function(...args) {
+        const key = JSON.stringify(args.sort());
+        console.log(key)
+        console.log('cache before ', cache)
+
+        if (cache[`${key}`] !== undefined ) {
+            console.log('Get from cache')
+            return cache[`${key}`]
+        }
+
+        console.log('First calculation')
+        const result = callback(...args)
+        cache[`${key}`] = result
+        console.log('cache after ', cache)
+
+        return result
+    }
+}
+function sum(...args){
+    return args.reduce((acc, item)=>{
+        acc += item;
+        return acc
+    }, 0)
+}
+
+const sumWithCache = memoize(sum);
+console.log(sumWithCache(1,2,3));
+console.log(sumWithCache(2,1,3));
+console.log(sumWithCache(3,2,1));
+
+//2
+function add(a) {
+  return function(b) {
+    if (b === undefined) {
+      return a;
+    }
+    return add(a + b);
+  };
+}
+console.log(add(1)(2)(3)()); // 6
+console.log(add(1)(2)(3)(4)(5)()); // 15
+
+//3
+function logger() {
+   console.log(`I output only external context: ${this.item}`);
+}
+
+const obj = { item: "some value" };
+
+console.log(logger.call(obj));
+console.log(logger.apply(obj));
+
+const somVar = logger.bind(obj);
+console.log(somVar());
+
+//4
+Function.prototype.bind = function(context) {
+    const func = this; 
+    return function(...args) { 
+        return func.apply(context, args); 
+    }
+}
