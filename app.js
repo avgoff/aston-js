@@ -284,5 +284,3 @@ myList1.delete(2)
 console.log(myList1);
 
 console.log(myList1.size());//3
-
-
